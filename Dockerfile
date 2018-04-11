@@ -1,5 +1,9 @@
 FROM python:3.6-alpine
 
+ENV SPATIALITE_LIBRARY_PATH "/usr/lib/mod_spatialite.so.7"
+ENV GEOS_LIBRARY_PATH "/usr/lib/libgeos_c.so.1"
+ENV GDAL_LIBRARY_PATH "/usr/lib/libgdal.so.20"
+
 RUN set -ex \
     && apk add --no-cache --virtual .tools \
       gettext \
@@ -8,4 +12,5 @@ RUN set -ex \
       geos \
       proj4 \
       gdal \
-      libspatialite
+      libspatialite \
+    && ln -s /usr/lib/libproj.so.12 /usr/lib/libproj.so
